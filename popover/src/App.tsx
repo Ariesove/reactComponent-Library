@@ -9,6 +9,8 @@ import {
   FloatingArrow
 } from '@floating-ui/react';
 import { useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
+import PopoverComponent from './index'
  import './App.css'
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,10 +35,11 @@ export default function App() {
 
   return (
     <>
-      <button ref={refs.setReference} {...getReferenceProps()}>
+      {/* <button ref={refs.setReference} {...getReferenceProps()}>
         hello
-      </button>
-      {
+      </button> */}
+      <PopoverComponent></PopoverComponent>
+      {/* {
         isOpen && <div
             ref={refs.setFloating}
             style={floatingStyles}
@@ -45,7 +48,7 @@ export default function App() {
             光光光光光
                        <FloatingArrow ref={arrowRef} context={context} fill="#fff" stroke="#000" strokeWidth={1}/>
           </div>
-      }
+      } */}
 
     </>
   );
