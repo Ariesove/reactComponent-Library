@@ -13,17 +13,22 @@ type Props = {
 };
 
 export const Lazy = (props: Props) => {
-  const { itemSize = 10, height, itemCount, children, width } = props;
+  const {
+    itemSize = 20,
+    height = 1000,
+    itemCount = 100,
+    children,
+    width,
+  } = props;
   const [scrollTop, setScrollTop] = useState(0);
 
   const handleScroll = (e: any) => {
     setScrollTop(e.currentTarget.scrollTop);
-    
   };
 
   const getContainer = (scrollTop: number) => {
     //可视区域上边界
-    let startIndex = Math.floor(scrollTop / parseInt(itemSize));
+    let startIndex = Math.floor(scrollTop / itemSize);
     // 缓冲区域上边界
     let cacheStartIndex = startIndex - 2;
     // 可视区能展示的元素的最大个数
@@ -34,7 +39,14 @@ export const Lazy = (props: Props) => {
     for (let i = cacheStartIndex; i < cacheEndIndex; i++) {
       items.push(
         <div
-          style={{ position: "absolute", top: i * itemSize, height: itemSize }}
+          key={i}
+          style={{
+            position: "absolute",
+            top: i * itemSize,
+            height: itemSize,
+            width: 100,
+            backgroundColor: "red",
+          }}
         >
           {i}
         </div>
@@ -42,7 +54,6 @@ export const Lazy = (props: Props) => {
     }
     return items;
   };
-
 
   return (
     <div
