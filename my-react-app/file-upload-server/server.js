@@ -26,6 +26,11 @@ const upload = multer({ storage: storage });
 // 创建文件上传处理路由
 app.post('/upload', upload.single('chunk'), (req, res) => {
   console.log(`Received chunk ${req.body.index}`);
+  if (Math.random() < 0.6) {
+    return res.status(500).json({
+      message: 'Simulated server error'
+    })
+  }
   res.status(200).json({ message: 'Chunk uploaded successfully' });
 });
 
